@@ -3,6 +3,7 @@
 -- When an option is changed, the GUI is also immediately updated.
 
 local _, WBT = ...;
+local L = LibStub("AceLocale-3.0"):GetLocale(WBT.addon_name);
 
 local Options = {};
 WBT.Options = Options;
@@ -208,13 +209,13 @@ local function PrintHelp()
     WBT.AceConfigDialog:Open(WBT.addon_name);
     local indent = "   ";
     WBT:Print("WorldBossTimers slash commands:");
-    WBT:Print("/wbt reset"       .. " --> Reset all timers");
-    WBT:Print("/wbt gui-reset"   .. " --> Reset the position of the timers window");
-    WBT:Print("/wbt saved"       .. " --> Print your saved bosses");
-    WBT:Print("/wbt show"        .. " --> Show the timers window");
-    WBT:Print("/wbt hide"        .. " --> Hide the timers window");
-    WBT:Print("/wbt gui-toggle"  .. " --> Toggle visibility of the timers window");
-    WBT:Print("/wbt log <level>" .. " --> Set log level for debug purposes");
+    WBT:Print("/wbt reset"       .. L[" --> Reset all timers"]);
+    WBT:Print("/wbt gui-reset"   .. L[" --> Reset the position of the timers window"]);
+    WBT:Print("/wbt saved"       .. L[" --> Print your saved bosses"]);
+    WBT:Print("/wbt show"        .. L[" --> Show the timers window"]);
+    WBT:Print("/wbt hide"        .. L[" --> Hide the timers window"]);
+    WBT:Print("/wbt gui-toggle"  .. L[" --> Toggle visibility of the timers window"]);
+    WBT:Print("/wbt log <level>" .. L[" --> Set log level for debug purposes"]);
 end
 
 function Options.SlashHandler(input)
@@ -285,7 +286,7 @@ end
 
 ----- Options table -----
 function Options.InitializeOptionsTable()
-    local desc_toggle = "Enable/Disable";
+    local desc_toggle = L["Enable/Disable"];
 
     Options.optionsTable = {
       type = "group",
@@ -293,10 +294,10 @@ function Options.InitializeOptionsTable()
       args = {
         hints = {
             name =  -- Hint_1
-                    Util.ColoredString(Util.COLOR_ORANGE, "Hint:") ..
-                    " Control-click a timer that is shown in " .. Util.ColoredString(Util.COLOR_RED, "red") .. " to reset it.\n" ..
+                    Util.ColoredString(Util.COLOR_ORANGE, L["Hint:"]) ..
+                    " Control-click a timer that is shown in " .. Util.ColoredString(Util.COLOR_RED, L["red"]) .. " to reset it.\n" ..
                     -- Hint_2
-                    Util.ColoredString(Util.COLOR_ORANGE, "Hint:") ..
+                    Util.ColoredString(Util.COLOR_ORANGE, L["Hint:"]) ..
                     " Control-shift-click to reset any timer.\n",
             order = t_cnt:plusplus(),
             type = "description",
@@ -310,7 +311,7 @@ function Options.InitializeOptionsTable()
             width = "full",
         },
         show = {
-            name = "Show GUI",
+            name = L["Show GUI"],
             order = t_cnt:plusplus(),
             desc = desc_toggle,
             type = "toggle",
@@ -319,7 +320,7 @@ function Options.InitializeOptionsTable()
             get = function(info) return Options.show_gui.get(); end,
         },
         show_boss_zone_only = {
-            name = "Only show GUI in boss zones",
+            name = L["Only show GUI in boss zones"],
             order = t_cnt:plusplus(),
             desc = desc_toggle,
             type = "toggle",
@@ -328,25 +329,25 @@ function Options.InitializeOptionsTable()
             get = function(info) return Options.show_boss_zone_only.get(); end,
         },
         lock = {
-            name = "Lock GUI",
+            name = L["Lock GUI"],
             order = t_cnt:plusplus(),
-            desc = "Toggle if the GUI should be locked or movable",
+            desc = L["Toggle if the GUI should be locked or movable"],
             type = "toggle",
             width = "full",
             set = function(info, val) Options.lock:Toggle(); end,
             get = function(info) return Options.lock.get() end,
         },
         global_gui_position = {
-            name = "Account-wide GUI position",
+            name = L["Account-wide GUI position"],
             order = t_cnt:plusplus(),
-            desc = "When enabled the GUI position is the same for characters",
+            desc = L["When enabled the GUI position is the same for characters"],
             type = "toggle",
             width = "full",
             set = function(info, val) Options.global_gui_position:Toggle(); end,
             get = function(info) return Options.global_gui_position.get(); end,
         },
         sound = {
-            name = "Sound",
+            name = L["Sound"],
             order = t_cnt:plusplus(),
             desc = desc_toggle,
             type = "toggle",
@@ -355,68 +356,68 @@ function Options.InitializeOptionsTable()
             get = function(info) return Options.sound.get(); end,
         },
         assume_realm_keeps_shard = {
-            name = "Assume realms do not change shards",
+            name = L["Assume realms do not change shards"],
             order = t_cnt:plusplus(),
-            desc = "Uses the last known shard ID for this realm when the current shard ID is unknown. " ..
-                   "This may lead to incorrect timers.",
+            desc = L["Uses the last known shard ID for this realm when the current shard ID is unknown. " ..
+                   "This may lead to incorrect timers."],
             type = "toggle",
             width = "full",
             set = function(info, val) Options.assume_realm_keeps_shard:Toggle(); end,
             get = function(info) return Options.assume_realm_keeps_shard.get(); end,
         },
         multi_realm = {  -- NOTE: Should be named multi_shard, but to keep user set option values, it was not renamed.
-            name = "Show timers for other shards",
+            name = L["Show timers for other shards"],
             order = t_cnt:plusplus(),
-            desc = "Shows timers for other shards",
+            desc = L["Shows timers for other shards"],
             type = "toggle",
             width = "full",
             set = function(info, val) Options.multi_realm:Toggle(); end,
             get = function(info) return Options.multi_realm.get(); end,
         },
         highlight = {
-            name = "Highlight boss in current zone",
+            name = L["Highlight boss in current zone"],
             order = t_cnt:plusplus(),
-            desc = "The boss in your current zone will have a different color if the current shard ID matches the timer:\n" ..
-                    Util.ColoredString(Util.COLOR_LIGHTGREEN, "Green") .. " if timer not expired\n" ..
-                    Util.ColoredString(Util.COLOR_YELLOW, "Yellow") .." if timer expired (with Cyclic mode)",
+            desc = L["The boss in your current zone will have a different color if the current shard ID matches the timer:\n"] ..
+                    Util.ColoredString(Util.COLOR_LIGHTGREEN, L["Green"]) .. " if timer not expired\n" ..
+                    Util.ColoredString(Util.COLOR_YELLOW, L["Yellow"]) .." if timer expired (with Cyclic mode)",
             type = "toggle",
             width = "full",
             set = function(info, val) Options.highlight:Toggle(); end,
             get = function(info) return Options.highlight.get(); end,
         },
         show_saved = {
-            name = "Show if saved",
+            name = L["Show if saved"],
             order = t_cnt:plusplus(),
-            desc = "Appends a colored 'X' (" .. Util.ColoredString(Util.COLOR_RED, "X") .. "/" .. Util.ColoredString(Util.COLOR_GREEN, "X") .. ")" ..
-                    " after the timer if you are saved for the boss.\n" ..
-                    "NOTE: The color of the 'X' has no special meaning, it's just for improved visibility.",
+            desc = L["Appends a colored 'X' ("] .. Util.ColoredString(Util.COLOR_RED, "X") .. "/" .. Util.ColoredString(Util.COLOR_GREEN, "X") .. ")" ..
+                    L[" after the timer if you are saved for the boss.\n"] ..
+                    L["NOTE: The color of the 'X' has no special meaning, it's just for improved visibility."],
             type = "toggle",
             width = "full",
             set = function(info, val) Options.show_saved:Toggle(); end,
             get = function(info) return Options.show_saved.get(); end,
         },
         show_realm = {
-            name = "Show realm",
+            name = L["Show realm"],
             order = t_cnt:plusplus(),
-            desc = "Shows the first three characters of the realm on which the timer was recorded.",
+            desc = L["Shows the first three characters of the realm on which the timer was recorded."],
             type = "toggle",
             width = "full",
             set = function(info, val) Options.show_realm:Toggle(); end,
             get = function(info) return Options.show_realm.get(); end,
         },
         cyclic = {
-            name = "Cyclic (show expired)",
+            name = L["Cyclic (show expired)"],
             order = t_cnt:plusplus(),
-            desc = "If you missed a kill, the timer will wrap around and will now have a red color",
+            desc = L["If you missed a kill, the timer will wrap around and will now have a red color"],
             type = "toggle",
             width = "normal",
             set = function(info, val) Options.cyclic:Toggle(); end,
             get = function(info) return Options.cyclic.get(); end,
         },
         num_cycles_to_show = {
-            name = "Number of cycles to show",
+            name = L["Number of cycles to show"],
             order = t_cnt:plusplus(),
-            desc = "If set to the max value, then expired timers will always be shown",
+            desc = L["If set to the max value, then expired timers will always be shown"],
             type = "range",
             min = 0,
             max = Options.NUM_CYCLES_TO_SHOW_MAX,
@@ -435,7 +436,7 @@ function Options.InitializeOptionsTable()
             width = "full",
         },
         log_level = {
-            name = "Log level",
+            name = L["Log level"],
             order = t_cnt:plusplus(),
             desc = "Log level",
             type = "select",
@@ -446,9 +447,9 @@ function Options.InitializeOptionsTable()
             get = function(info) return Options.log_level.get(); end,
         },
         spawn_alert_sound = {
-            name = "Spawn alert sound",
+            name = L["Spawn alert sound"],
             order = t_cnt:plusplus(),
-            desc = "Sound alert that plays when boss spawns",
+            desc = L["Sound alert that plays when boss spawns"],
             type = "select",
             style = "dropdown",
             width = "normal",
@@ -457,9 +458,9 @@ function Options.InitializeOptionsTable()
             get = function(info) return Options.spawn_alert_sound.get(); end,
         },
         spawn_alert_sec_before = {
-            name = "Alert sec before spawn",
+            name = L["Alert sec before spawn"],
             order = t_cnt:plusplus(),
-            desc = "How many seconds before boss spawn the alert will happen",
+            desc = L["How many seconds before boss spawn the alert will happen"],
             type = "range",
             min = 0,
             max = 60*5,

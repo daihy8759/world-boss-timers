@@ -1,6 +1,7 @@
 -- The code for the GUI, i.e. the window with the timers.
 
 local _, WBT = ...;
+local L = LibStub("AceLocale-3.0"):GetLocale(WBT.addon_name);
 
 local Util = WBT.Util;
 local Options = {}; -- Must be initialized later.
@@ -486,17 +487,17 @@ function GUI:New()
 
     self.btn_req = GUI.AceGUI:Create("Button");
     self.btn_req:SetRelativeWidth(BTN_REQ_REL_WIDTH);
-    self.btn_req:SetText("Req.");
+    self.btn_req:SetText(L["Req."]);
     self.btn_req:SetCallback("OnClick", WBT.RequestKillData);
 
     self.btn_opts = GUI.AceGUI:Create("Button");
-    self.btn_opts:SetText("/wbt");
+    self.btn_opts:SetText(L["/wbt"]);
     self.btn_opts:SetRelativeWidth(BTN_OPTS_REL_WIDTH);
     self.btn_opts:SetCallback("OnClick", function() WBT.AceConfigDialog:Open(WBT.addon_name); end);
 
     self.btn_share = GUI.AceGUI:Create("Button");
     self.btn_share:SetRelativeWidth(BTN_SHARE_REL_WIDTH);
-    self.btn_share:SetText("Share");
+    self.btn_share:SetText(L["Share"]);
     self.btn_share:SetCallback("OnClick", WBT.Functions.AnnounceTimerInChat);
 
     self.btn_container = GUI.AceGUI:Create("SimpleGroup");

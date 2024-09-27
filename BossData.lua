@@ -7,6 +7,7 @@ local Sound = WBT.Sound;
 
 local BossData = {};
 WBT.BossData = BossData;
+local L = LibStub("AceLocale-3.0"):GetLocale(WBT.addon_name)
 
 local function MinToSec(min)
     return min * 60;
@@ -47,7 +48,7 @@ end
 
 local tracked_bosses = {
     ["Oondasta"] = {
-        name = "Oondasta",
+        name = L["Oondasta"],
         color = "|cff21ffa3",
         ids = {69161},
         is_saved_fcn = function() return IsSavedWorldBoss(4); end,
@@ -66,7 +67,7 @@ local tracked_bosses = {
         },
     },
     ["Rukhmar"] = {
-        name = "Rukhmar",
+        name = L["Rukhmar"],
         color = "|cfffa6e06",
         ids = {83746},
         is_saved_fcn = function() return IsSavedWorldBoss(9); end,
@@ -85,7 +86,7 @@ local tracked_bosses = {
         },
     },
     ["Galleon"] = {
-        name = "Galleon",
+        name = L["Galleon"],
         color = "|cffc1f973",
         ids = {62346},
         is_saved_fcn = function() return IsSavedWorldBoss(2); end,
@@ -104,7 +105,7 @@ local tracked_bosses = {
         },
     },
     ["Nalak"] = {
-        name = "Nalak",
+        name = L["Nalak"],
         color = "|cff0081cc",
         ids = {69099},
         is_saved_fcn = function() return IsSavedWorldBoss(3); end,
@@ -123,7 +124,7 @@ local tracked_bosses = {
         },
     },
     ["Sha of Anger"] = {
-        name = "Sha of Anger",
+        name = L["Sha of Anger"],
         color = "|cff8a1a9f",
         ids = {60491},
         is_saved_fcn = function() return IsSavedWorldBoss(1); end,
@@ -142,7 +143,7 @@ local tracked_bosses = {
         },
     },
     ["Huolon"] = {
-        name = "Huolon",
+        name = L["Huolon"],
         color = "|cfff7f713",
         ids = {73167},
         is_saved_fcn = NeverSaved,
@@ -161,7 +162,7 @@ local tracked_bosses = {
         },
     },
     ["Rustfeather"] = {
-        name = "Rustfeather",
+        name = L["Rustfeather"],
         color = "|cffffe17d",
         ids = {152182},
         is_saved_fcn = function() return IsSavedDaily(55811); end,
@@ -180,7 +181,7 @@ local tracked_bosses = {
         },
     },
     ["A. Harvester"] = {
-        name = "A. Harvester", -- Shortened to keep GUI text to one line.
+        name = L["A. Harvester"], -- Shortened to keep GUI text to one line.
         color = "|cffe08748",
         ids = {151934},
         is_saved_fcn = function() return IsSavedDaily(55512); end,
@@ -202,7 +203,7 @@ local tracked_bosses = {
 --      Won't add. Very long timer and prone to zone resets. Timers will not be reliable.
 -- },
     ["Rei Lun"] = {
-        name = "Rei Lun",
+        name = L["Rei Lun"],
         color = "|cff23dcfc",
         ids = {157162},
         is_saved_fcn = function() return IsSavedDaily(57346); end,
@@ -220,8 +221,8 @@ local tracked_bosses = {
             radius = 0.03,
         },
     },
-    ["Ha-Li"] = {
-        name = "Ha-Li",
+    ["Ha Li"] = {
+        name = L["Ha Li"],
         color = "|cff0394fc",
         ids = {157153},
         is_saved_fcn = function() return IsSavedDaily(57344); end,
@@ -239,8 +240,8 @@ local tracked_bosses = {
             radius = 0.08,
         },
     },
-    ["Anh-De"] = {
-        name = "Anh-De",
+    ["Anh De"] = {
+        name = L["Anh De"],
         color = "|cfffaea75",
         ids = {157466},
         is_saved_fcn = function() return IsSavedDaily(57363); end,
@@ -259,7 +260,7 @@ local tracked_bosses = {
         },
     },
     ["Houndlord Ren"] = {
-        name = "Houndlord Ren",
+        name = L["Houndlord Ren"],
         color = "|cfffaab34",
         ids = {157160},
         is_saved_fcn = function() return IsSavedDaily(57345); end,
@@ -278,7 +279,7 @@ local tracked_bosses = {
         },
     },
     ["Corpse Eater"] = {
-        name = "Corpse Eater",
+        name = L["Corpse Eater"],
         color = "|cffa884ff",
         ids = {162147},
         is_saved_fcn = function() return IsSavedDaily(58696); end,
@@ -297,7 +298,7 @@ local tracked_bosses = {
         },
     },
     ["Rotfeaster"] = {
-        name = "Rotfeaster",
+        name = L["Rotfeaster"],
         color = "|cffffc489",
         ids = {157146},
         is_saved_fcn = function() return IsSavedDaily(57273); end,
@@ -316,7 +317,7 @@ local tracked_bosses = {
         },
     },
     ["Ishak"] = {
-        name = "Ishak",  -- Ishak of the Four Winds
+        name = L["Ishak"],  -- Ishak of the Four Winds
         color = "|cff0394fc",
         ids = {157134},
         is_saved_fcn = function() return IsSavedDaily(57259); end,
@@ -335,7 +336,7 @@ local tracked_bosses = {
         },
     },
     ["Mal'Korak"] = {
-        name = "Mal'Korak",  -- Warbringer Mak'Korak
+        name = L["Mal'Korak"],  -- Warbringer Mak'Korak
         color = "|cff99ba4e",
         ids = {162819},
         is_saved_fcn = function() return IsSavedDaily(58889); end,
@@ -354,9 +355,9 @@ local tracked_bosses = {
         },
     },
     ["Nerissa"] = {
-        name = "Nerissa",  -- Nerissa Heartless
+        name = L["Nerissa"],  -- Nerissa Heartless
         color = "|cffbec0c2",
-        ids = {162819},
+        ids = {162690},
         is_saved_fcn = function() return IsSavedDaily(58851); end,
         soundfile = Sound.SOUND_FILE_DEFAULT,
         min_respawn = MinToSec(45),
@@ -376,7 +377,7 @@ local tracked_bosses = {
 --      Won't add. Not limited by respawn time, but by the time and effort it takes to spawn it.
 --  },
     ["Hopecrusher"] = {
-        name = "Hopecrusher",
+        name = L["Hopecrusher"],
         color = "|cfffaab34",
         ids = {166679},
         is_saved_fcn = function() return IsSavedDaily(59900); end,
@@ -395,7 +396,7 @@ local tracked_bosses = {
         },
     },
     ["Famu"] = {
-        name = "Famu",  -- Famu the Infinite
+        name = L["Famu"],  -- Famu the Infinite
         color = "|cff0394fc",
         ids = {166521},
         is_saved_fcn = function() return IsSavedDaily(59869); end,
@@ -426,7 +427,7 @@ local tracked_bosses = {
 --      Won't add. Apparently short respawn of about 5 min.
 --  },
     ["Reliwik"] = {
-        name = "Reliwik",  -- Reliwik the Defiant
+        name = L["Reliwik"],  -- Reliwik the Defiant
         color = "|cffe147ff",
         ids = {180160},
         is_saved_fcn = function() return IsSavedDaily(64455); end,
@@ -450,44 +451,27 @@ local tracked_bosses = {
 --  ["Hirukon"] = {
 --      Won't add. Not limited by respawn time, but by the time and effort it takes to spawn it.
 --  },
---@do-not-package@
-    ["Grellkin"] = {
-        name = "Grellkin",
-        color = "|cffffff00",
-        map_id = 460,
-        ids = {1989},
+
+
+    ["Breezebiter"] = {
+        name = L["Breezebiter"],  --
+        color = "|cffe147ff",
+        ids = {195353},
         is_saved_fcn = NeverSaved,
-        soundfile = SOUND_DIR .. "grellkin2.mp3",
-        min_respawn = MIN_RESPAWN_SHA,
-        max_respawn = MAX_RESPAWN_SHA,
+        soundfile = Sound.SOUND_FILE_DEFAULT,
+        min_respawn = MinToSec(60),
+        max_respawn = MinToSec(120),  
         random_spawn_time = true,
         auto_announce = true,
+        map_id = 2024,
         perimiter = {
             origin = {
-                x = 0.50000000,
-                y = 0.50000000,
+                x = 0.2978,
+                y = 0.4622,
             },
-            radius = 1.00,
+            radius = 0.02,
         },
     },
-    --[[
-    -- Dummy.
-    -- TODO: Add missing fields. Should work after perimiter checks.
-    ["Young Nightsaber"] = {
-        name = "Young Nightsaber",
-        color = "|cffff3d4a",
-        zone =  "_Shadowglen",
-        map_id = 460,
-        ids = {2031},
-        is_saved_fcn = NeverSaved,
-        soundfile = SOUND_DIR .. "vale_moth1.mp3",
-        min_respawn = MIN_RESPAWN_SHA,
-        max_respawn = MIN_RESPAWN_SHA,
-        random_spawn_time = false,
-        auto_announce = true,
-    },
-    ]]--
---@end-do-not-package@
 }
 
 local ZWB_STATIC_DATA = {

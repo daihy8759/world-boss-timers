@@ -8,6 +8,9 @@
 
 embeds.xml
 
+## Locales
+Locales\zhCN.lua
+
 Util.lua
 Sound.lua
 BossData.lua

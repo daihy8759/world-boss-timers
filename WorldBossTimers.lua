@@ -5,6 +5,7 @@
 -- addonName, addonTable = ...;
 local _, WBT = ...;
 WBT.addon_name = "WorldBossTimers";
+local L = LibStub("AceLocale-3.0"):GetLocale(WBT.addon_name)
 
 local KillInfo = WBT.KillInfo;
 local BossData = WBT.BossData;
@@ -152,7 +153,7 @@ local g_current_shard_id;
 
 local CHANNEL_ANNOUNCE = "SAY";
 local SERVER_DEATH_TIME_PREFIX = "WorldBossTimers:";
-local CHAT_MESSAGE_TIMER_REQUEST = "Could someone share WBT timer?";
+local CHAT_MESSAGE_TIMER_REQUEST = L["Could someone share WBT timer?"];
 
 WBT.defaults = {
     global = {
@@ -349,7 +350,7 @@ function WBT.GetPrimaryKillInfo()
         end
     end
     if Util.TableLength(found) > 1 then
-        Logger.Debug("More than one boss found at current position. Only using first.");
+        Logger.Debug(L["More than one boss found at current position. Only using first."]);
     end
     for _, ki in pairs(found) do
         if not ki:HasUnknownShard() then
@@ -417,11 +418,11 @@ function WBT.ResetBoss(ki_id)
         g_kill_infos[ki_id] = nil;
         g_gui:Rebuild();
         local name = KillInfo.ParseID(ki_id).boss_name;
-        Logger.Info(GetColoredBossName(name) .. " has been reset.");
+        Logger.Info(GetColoredBossName(name) .. L[" has been reset."]);
     else
         local cyclic = Util.ColoredString(Util.COLOR_RED, "cyclic");
-        WBT:Print("Ctrl-clicking a timer that is " .. cyclic .. " will reset it."
-              .. " Ctrl-shift-clicking will reset any timer. For more info about " .. cyclic .. " mode: /wbt cyclic");
+        WBT:Print(L["Ctrl-clicking a timer that is "] .. cyclic .. " will reset it."
+              .. L[" Ctrl-shift-clicking will reset any timer. For more info about "] .. cyclic .. L[" mode: /wbt cyclic"]);
     end
 end
 
@@ -467,15 +468,15 @@ local function GetSafeSpawnAnnouncerWithCooldown()
         local t_now = GetServerTime();
 
         if WBT.IsUnknownShard(WBT.GetCurrentShardID()) then
-            Logger.Info("Can't share timers when the shard ID is unknown. Mouse over an NPC to detect it.");
+            Logger.Info(L["Can't share timers when the shard ID is unknown. Mouse over an NPC to detect it."]);
             return announced;
         end
         if not ki then
-            Logger.Info("No fresh timer found for current location and shard ID.");
+            Logger.Info(L["No fresh timer found for current location and shard ID."]);
             return announced;
         end
         if not ((t_last_announce + 1) <= t_now) then
-            Logger.Info("Can only share once per second.");
+            Logger.Info(L["Can only share once per second."]);
             return announced;
         end
 
@@ -485,7 +486,7 @@ local function GetSafeSpawnAnnouncerWithCooldown()
             t_last_announce = t_now;
             announced = true;
         else
-            Logger.Info("Cannot share timer for " .. GetColoredBossName(ki.boss_name) .. ":");
+            Logger.Info(L["Cannot share timer for "] .. GetColoredBossName(ki.boss_name) .. ":");
             Logger.Info(errors);
             return announced;
         end
@@ -558,7 +559,7 @@ local function StartCombatHandler()
         -- Check for boss combat
         local t = GetServerTime();
         if t > combat_frame.t_next_alert_boss_combat then
-            WBT:Print(GetColoredBossName(name) .. " is now engaged in combat!");
+            WBT:Print(GetColoredBossName(name) .. L[" is now engaged in combat!"]);
             PlaySoundAlertBossCombat(name);
             FlashClientIcon();
             combat_frame.t_next_alert_boss_combat = t + timeout_combat;

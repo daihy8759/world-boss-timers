@@ -1,6 +1,7 @@
 -- Sound related constant data.
 
 local _, WBT = ...;
+local L = LibStub("AceLocale-3.0"):GetLocale(WBT.addon_name)
 
 local Sound = {};
 WBT.Sound = Sound;
@@ -27,13 +28,13 @@ Sound.sound_tbl = {
         file_id = "file_id",
     },
     tbl = WBT.Util.MultiKeyTable:New({
-        { option = "DISABLED",                    file_id = nil,     },
-        { option = "you-are-not-prepared",        file_id = 552503,  },
-        { option = "prepare-yourselves",          file_id = 547915,  },
-        { option = "alliance-bell",               file_id = 566564,  },
-        { option = "alarm-clock",                 file_id = 567399,  },
-        { option = Sound.SOUND_KEY_BATTLE_BEGINS, file_id = 2128648, },
-        { option = "pvp-warning",                 file_id = 567505,  },
-        { option = "drum-hit",                    file_id = 1487139, },
+        { option = L["DISABLED"],                    file_id = nil,     },
+        { option = L["you-are-not-prepared"],        file_id = 552503,  },
+        { option = L["prepare-yourselves"],          file_id = 547915,  },
+        { option = L["alliance-bell"],               file_id = 566564,  },
+        { option = L["alarm-clock"],                 file_id = 567399,  },
+        { option = L[Sound.SOUND_KEY_BATTLE_BEGINS], file_id = 2128648, },
+        { option = L["pvp-warning"],                 file_id = 567505,  },
+        { option = L["drum-hit"],                    file_id = 1487139, },
     }),
 };
